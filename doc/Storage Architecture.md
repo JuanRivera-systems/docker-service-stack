@@ -14,7 +14,7 @@ Minimized Disruption: Ensure maintenance activities do not impact service availa
 Storage Tiers
 Storage Tier	Technology	Primary Purpose
 High-Capacity	RAID6 SAS Array	Media libraries, long-term archives, backup repositories
-High-Performance	RAID1 SSD Pool	Virtual machines, databases, container root filesystems
+High-Performance	RAID10 SSD Pool	Virtual machines, databases, container root filesystems
 System Boot	NVMe SSD	Proxmox host OS, hypervisor services
 Physical Platform
 Enterprise Storage Array (RAID6)
@@ -22,8 +22,8 @@ The primary data plane consists of a 20-drive enterprise SAS array configured in
 
 Workloads: Media streaming, shared file storage, backup repositories, cold data retention.
 Key Benefits: High usable capacity, resilience against simultaneous drive failures, cost-effective scaling.
-SSD Performance Pool (RAID1)
-A dedicated four-drive RAID1 SSD pool serves as the high-speed tier for performance-critical workloads. This layer minimizes I/O bottlenecks for active applications.
+SSD Performance Pool (RAID10)
+A dedicated four-drive RAID10 SSD pool serves as the high-speed tier for performance-critical workloads. This layer minimizes I/O bottlenecks for active applications.
 
 Workloads: Virtual Machine disks, database files, container layers, authentication services.
 Key Benefits: Sub-millisecond latency, rapid VM provisioning, improved application responsiveness.
@@ -50,8 +50,8 @@ Survives two simultaneous drive failures.
 Maximizes usable capacity for large datasets.
 Robust resiliency during long rebuild operations.
 Operational Insight: Experience with RAID expansion and migration projects highlighted the critical need for proactive drive health monitoring and careful planning during capacity upgrades to avoid performance degradation.
-RAID1 SSD Pool
-Critical workloads reside on a RAID1 mirrored pool of four SSDs. This setup prioritizes read/write speed and availability over raw capacity.
+RAID10 SSD Pool
+Critical workloads reside on a RAID10 mirrored pool of four SSDs. This setup prioritizes read/write speed and availability over raw capacity.
 
 Advantages:
 Instant failover if a drive fails.
@@ -62,7 +62,7 @@ Storage resources are allocated dynamically based on workload I/O profiles:
 
 Workload Type	Examples	Storage Tier
 High Capacity	Media Libraries, Archives, Backups	RAID6 SAS Array
-High Performance	VMs, Auth Services, Containers	SSD RAID1 Pool
+High Performance	VMs, Auth Services, Containers	SSD RAID10 Pool
 System	Hypervisor, Logs, Configs	NVMe Boot
 Data Protection Strategy
 A multi-layered approach ensures data integrity and availability:
